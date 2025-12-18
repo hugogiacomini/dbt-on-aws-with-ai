@@ -1,0 +1,46 @@
+version: 2
+
+sources:
+  - name: raw
+    schema: raw
+    database: football_analytics
+    tables:
+      - name: competitions
+        description: Raw competition data from Football-Data.org API
+      - name: teams
+        description: Raw team data from Football-Data.org API
+      - name: matches
+        description: Raw match data from Football-Data.org API
+      - name: standings
+        description: Raw standings data from Football-Data.org API
+
+models:
+  - name: stg_competitions
+    description: Staging view for competitions with cleaned and standardized fields
+    columns:
+      - name: competition_id
+        description: Unique identifier for the competition
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_teams
+    description: Staging view for teams with cleaned and standardized fields
+    columns:
+      - name: team_id
+        description: Unique identifier for the team
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_matches
+    description: Staging view for matches with cleaned and standardized fields
+    columns:
+      - name: match_id
+        description: Unique identifier for the match
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_standings
+    description: Staging view for standings with cleaned and standardized fields
