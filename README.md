@@ -18,12 +18,53 @@ This project demonstrates a complete data analytics pipeline that extracts footb
 
 ## 🏗️ Architecture
 
-```
-Football-Data.org API → Python ETL → PostgreSQL → dbt → Metabase
-                                    ↓
-                              Airflow Orchestration
-                                    ↓
-                              CrewAI Agents
+```mermaid
+graph TB
+   subgraph "Data Sources"
+      API[Football-Data.org API]
+   end
+   
+   subgraph "Extraction & Loading"
+      ETL[Python ETL<br/>API Client]
+   end
+   
+   subgraph "Data Storage"
+      DB[(PostgreSQL<br/>Raw & Analytics)]
+   end
+   
+   subgraph "Transformation"
+      DBT[dbt<br/>Staging & Analytics Models]
+   end
+   
+   subgraph "Orchestration"
+      AIRFLOW[Apache Airflow<br/>DAGs & Scheduling]
+   end
+   
+   subgraph "Visualization"
+      MB[Metabase<br/>Dashboards & BI]
+   end
+   
+   subgraph "AI Agents"
+      CREW[CrewAI Agents<br/>Review & Recommendations]
+   end
+   
+   API -->|REST API| ETL
+   ETL -->|Raw Data| DB
+   DB -->|Transform| DBT
+   DBT -->|Analytics Tables| DB
+   DB -->|Query| MB
+   
+   AIRFLOW -.->|Orchestrates| ETL
+   AIRFLOW -.->|Orchestrates| DBT
+   
+   CREW -.->|Reviews| ETL
+   CREW -.->|Reviews| DBT
+   CREW -.->|Plans| MB
+   
+   style API fill:#e1f5ff
+   style DB fill:#fff4e1
+   style MB fill:#e8f5e9
+   style CREW fill:#f3e5f5
 ```
 
 **Data Flow:**
