@@ -6,7 +6,7 @@ This guide will help you set up and run the Football Analytics application local
 
 - Docker and Docker Compose installed
 - Python 3.11+ installed
-- Football-Data.org API key (get one at https://www.football-data.org/)
+- Football-Data.org API key (get one at <https://www.football-data.org/>)
 - (Optional) OpenAI API key or DeepSeek API key for CrewAI agents
 
 ## Project Structure
@@ -40,11 +40,13 @@ dbt-on-aws-with-ai/
 ## Step 1: Environment Configuration
 
 1. Copy the example environment file:
+
 ```bash
 cp .env.example .env
 ```
 
-2. Edit `.env` and add your API keys:
+1. Edit `.env` and add your API keys:
+
 ```bash
 # Required
 FOOTBALL_API_KEY=your_football_api_key_here
@@ -64,6 +66,7 @@ docker-compose up -d
 ```
 
 This will:
+
 - Start PostgreSQL on port 5432
 - Initialize the database with schemas (raw, staging, analytics)
 - Start Airflow webserver on port 8080
@@ -83,8 +86,9 @@ docker-compose ps
 All services should show as "healthy" or "running".
 
 Access the web interfaces:
-- **Airflow**: http://localhost:8080 (username: `admin`, password: `admin`)
-- **Metabase**: http://localhost:3000 (setup required on first visit)
+
+- **Airflow**: <http://localhost:8080> (username: `admin`, password: `admin`)
+- **Metabase**: <http://localhost:3000> (setup required on first visit)
 
 ## Step 4: Install Python Dependencies
 
@@ -104,6 +108,7 @@ python extract_football_data.py
 ```
 
 This will:
+
 - Extract competitions from Football-Data.org API
 - Extract teams, matches, and standings for major European leagues
 - Load data into PostgreSQL (raw schema)
@@ -123,7 +128,7 @@ This will create views in the `staging` schema and tables in the `analytics` sch
 
 ## Step 7: Configure Metabase
 
-1. Open http://localhost:3000
+1. Open <http://localhost:3000>
 2. Complete the initial setup wizard
 3. Add a database connection:
    - Database type: PostgreSQL
@@ -141,12 +146,13 @@ This will create views in the `staging` schema and tables in the `analytics` sch
 
 ## Step 8: Trigger Airflow DAG
 
-1. Open Airflow UI at http://localhost:8080
+1. Open Airflow UI at <http://localhost:8080>
 2. Find the `football_etl_pipeline` DAG
 3. Enable it by clicking the toggle switch
 4. Click "Trigger DAG" to run it manually
 
 The DAG will:
+
 1. Extract competitions
 2. Extract data for major competitions
 3. Run dbt dependencies
@@ -163,6 +169,7 @@ python crew.py
 ```
 
 The agents will:
+
 1. **BI Analyst**: Define business requirements
 2. **Lead Data Engineer**: Create technical specifications
 3. **Data Engineer**: Review pipeline implementation
@@ -173,9 +180,11 @@ The agents will:
 ## Troubleshooting
 
 ### API Rate Limiting
+
 Football-Data.org free tier has rate limits. The client handles this automatically with retries.
 
 ### Docker Services Not Starting
+
 ```bash
 # Check logs
 docker-compose logs -f
@@ -186,6 +195,7 @@ docker-compose up -d
 ```
 
 ### Database Connection Issues
+
 ```bash
 # Connect to PostgreSQL directly
 docker exec -it football_postgres psql -U airflow -d football_analytics
@@ -197,6 +207,7 @@ docker exec -it football_postgres psql -U airflow -d football_analytics
 ```
 
 ### dbt Errors
+
 ```bash
 # Check dbt debug
 cd dbt_football
@@ -209,11 +220,13 @@ cat target/run.log
 ## Stopping Services
 
 Stop all services:
+
 ```bash
 docker-compose down
 ```
 
 Stop and remove all data:
+
 ```bash
 docker-compose down -v
 ```

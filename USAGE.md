@@ -45,6 +45,7 @@ major_competition_ids = [
 ```
 
 Common competition IDs:
+
 - **2021**: Premier League (England)
 - **2014**: La Liga (Spain)
 - **2002**: Bundesliga (Germany)
@@ -129,6 +130,7 @@ limit 20
 ```
 
 Then run:
+
 ```bash
 dbt run --select top_scorers --profiles-dir .
 ```
@@ -137,7 +139,7 @@ dbt run --select top_scorers --profiles-dir .
 
 ### Access Airflow UI
 
-- URL: http://localhost:8080
+- URL: <http://localhost:8080>
 - Username: `admin`
 - Password: `admin`
 
@@ -169,6 +171,7 @@ dag = DAG(
 ```
 
 Restart Airflow to apply changes:
+
 ```bash
 docker-compose restart airflow-scheduler airflow-webserver
 ```
@@ -183,7 +186,7 @@ docker-compose restart airflow-scheduler airflow-webserver
 
 ### Initial Setup
 
-1. Access http://localhost:3000
+1. Access <http://localhost:3000>
 2. Create admin account
 3. Add database connection:
    - **Name**: Football Analytics
@@ -249,6 +252,7 @@ Choose visualization: **Grouped bar chart**
 ### Dashboard Filters
 
 Add filters to your dashboard:
+
 1. Edit dashboard
 2. Add filter (e.g., "Competition", "Date Range")
 3. Connect filter to questions
@@ -267,6 +271,7 @@ python3 crew.py
 ```
 
 The agents will:
+
 1. Analyze business requirements
 2. Review technical implementation
 3. Suggest improvements
